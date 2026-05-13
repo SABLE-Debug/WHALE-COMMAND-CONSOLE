@@ -123,6 +123,14 @@ body::after {
   pointer-events: none;
 }
 
+/* CSS-only auto-dismiss fallback — works even if JS never runs */
+.loader {
+  animation: loaderAutoHide 0.01s ease 6s forwards;
+}
+@keyframes loaderAutoHide {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
 .loader-bg {
   position: absolute;
   inset: 0;
@@ -1866,6 +1874,22 @@ body::after {
   </div>
   <div class="loader-text">AKHARA / COMMAND CONSOLE</div>
 </div>
+<script>
+// Loader dismissal — registered immediately at parse-time so it fires even if
+// the rest of the body (7MB+) is slow to parse on mobile cellular.
+(function(){
+  var hideLoader = function(){
+    var l = document.getElementById('loader');
+    if (l && !l.classList.contains('gone')) l.classList.add('gone');
+  };
+  setTimeout(hideLoader, 4500);
+  // Belt-and-braces: also fire on load + on first user interaction.
+  window.addEventListener('load', function(){ setTimeout(hideLoader, 1500); });
+  ['click','touchstart','keydown','scroll'].forEach(function(ev){
+    window.addEventListener(ev, hideLoader, { once: true, passive: true });
+  });
+})();
+</script>
 
 <!-- GRID BG -->
 <div class="grid-bg"></div>
@@ -2649,7 +2673,7 @@ body::after {
     <div class="emp-avatar-row">
       <div class="emp-avatar-wrap">
         <div class="emp-avatar">
-          <img src="avatars/06-scout.png" alt="The Scout">
+          <img src="avatars/06-scout.png" alt="The Scout" loading="lazy" decoding="async">
         </div>
       </div>
       <div>
@@ -2694,7 +2718,7 @@ body::after {
     <div class="emp-avatar-row">
       <div class="emp-avatar-wrap">
         <div class="emp-avatar">
-          <img src="avatars/07-editor.png" alt="The Editor">
+          <img src="avatars/07-editor.png" alt="The Editor" loading="lazy" decoding="async">
         </div>
       </div>
       <div>
@@ -2739,7 +2763,7 @@ body::after {
     <div class="emp-avatar-row">
       <div class="emp-avatar-wrap">
         <div class="emp-avatar">
-          <img src="avatars/08-producer.png" alt="The Producer">
+          <img src="avatars/08-producer.png" alt="The Producer" loading="lazy" decoding="async">
         </div>
       </div>
       <div>
@@ -2784,7 +2808,7 @@ body::after {
     <div class="emp-avatar-row">
       <div class="emp-avatar-wrap">
         <div class="emp-avatar">
-          <img src="avatars/09-voice.png" alt="The Voice">
+          <img src="avatars/09-voice.png" alt="The Voice" loading="lazy" decoding="async">
         </div>
       </div>
       <div>

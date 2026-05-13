@@ -6,6 +6,7 @@
   "description": "AKHARA agent showcase video pipeline — Remotion + ElevenLabs + ffmpeg",
   "scripts": {
     "video": "node scripts/build.mjs",
+    "promo": "node scripts/build-promo.mjs",
     "voiceover": "node scripts/voiceover.mjs",
     "render": "remotion render src/index.ts AgentIntro out/render.mp4",
     "studio": "remotion studio src/index.ts",

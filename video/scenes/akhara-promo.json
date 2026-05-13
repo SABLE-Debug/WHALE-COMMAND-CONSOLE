@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "title": "AKHARA — Command Console",
+    "subtitle": "akhara.co",
+    "brand": "AKHARA"
+  },
+  "scenes": [
+    {
+      "type": "title",
+      "eyebrow": "/ N°01 · OPERATING DOCUMENT",
+      "headline": "AKHARA.",
+      "subhead": "Three whales beat thirty minnows.",
+      "duration": 5
+    },
+    {
+      "type": "imessage",
+      "messages": [
+        { "from": "them", "text": "What do you sell?" },
+        { "from": "you", "text": "Departments." },
+        { "from": "them", "text": "Not hours?" },
+        { "from": "you", "text": "Never hours." }
+      ],
+      "duration": 8
+    },
+    {
+      "type": "stat-block",
+      "label": "ICP — RANK 01",
+      "headline": "PE-backed rollups.",
+      "stats": [
+        { "label": "Pay", "value": "$30–100K" },
+        { "label": "Reply", "value": "35–50%" },
+        { "label": "LTV", "value": "HIGHEST" },
+        { "label": "Cycle", "value": "60–90", "suffix": "DAYS" }
+      ],
+      "caption": "The lifetime niche.",
+      "duration": 7
+    },
+    {
+      "type": "bullet-reveal",
+      "headline": "The departments.",
+      "bullets": [
+        "01 / THE ARCHITECT",
+        "02 / THE CLOSER",
+        "03 / THE OPERATOR",
+        "04 / THE STRATEGIST",
+        "05 / THE CONDUCTOR"
+      ],
+      "duration": 8
+    },
+    {
+      "type": "quote",
+      "text": "AKHARA sells departments.",
+      "attribution": "N°01 · operating doctrine",
+      "duration": 5
+    },
+    {
+      "type": "stat-block",
+      "label": "TOOL STACK",
+      "headline": "Sub-1% of MRR.",
+      "stats": [
+        { "label": "Claude Max", "value": "$200", "suffix": "/MO" },
+        { "label": "API", "value": "$60", "suffix": "/MO" },
+        { "label": "11Labs", "value": "$22", "suffix": "/MO" },
+        { "label": "Total", "value": "$292", "suffix": "/MO" }
+      ],
+      "caption": "Three whales beat thirty minnows. Always.",
+      "duration": 7
+    },
+    {
+      "type": "outro",
+      "headline": "akhara.co",
+      "tagline": "Open for clients.",
+      "cta": "Reply / send the proposal",
+      "duration": 5
+    }
+  ]
+}

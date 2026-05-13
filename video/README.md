@@ -12,7 +12,7 @@ cp .env.example .env        # then paste your ElevenLabs key + voice ID
 
 You also need `ffmpeg` and `ffprobe` on your PATH (`brew install ffmpeg` on macOS).
 
-## Make a video
+## Make an agent intro video
 
 ```bash
 npm run video scout         # voiceover -> render -> mux -> out/scout.mp4
@@ -29,6 +29,30 @@ npm run video scout -- --no-vo
 ```
 
 The output will still be `out/scout.mp4` but silent.
+
+## Make a landing-page promo video
+
+Promo videos are generated from a **scenes JSON file** that describes the beats — title cards, iMessage bubbles, stat blocks, bullet reveals, pull quotes, outro. The Remotion `LandingPromo` composition renders them.
+
+```bash
+npm run promo                                # uses scenes/akhara-promo.json
+npm run promo scenes/my-other-promo.json     # custom scenes file
+npm run promo -- --no-vo                     # skip voiceover even if a script exists
+```
+
+Output: `out/promo-<name>.mp4`.
+
+### Generating the scenes JSON from HTML
+
+Use the `html-promo` Claude skill — it reads an HTML file (like `index.html`) and writes the scenes JSON in the schema `LandingPromo` expects. See `.claude/skills/html-promo/SKILL.md` for the full instructions and scene schema.
+
+Pattern: open Claude Code in this repo, run `/html-promo`, point it at the HTML, and it writes the JSON. Then `npm run promo`.
+
+### Voiceover for promos
+
+Put the script at `voiceover/scripts/promo-<name>.txt` (e.g. `promo-akhara-promo.txt` matches `scenes/akhara-promo.json`). The build script picks it up automatically.
+
+A starter script for the AKHARA promo is pre-written at `voiceover/scripts/promo-akhara-promo.txt`.
 
 ## Voiceover scripts
 
@@ -65,17 +89,36 @@ video/
   tsconfig.json
   src/
     index.ts                # registers RemotionRoot
-    Root.tsx                # one composition per agent
-    AgentIntro.tsx          # the reusable scene
+    Root.tsx                # registers all compositions
+    AgentIntro.tsx          # agent showcase composition
+    LandingPromo.tsx        # landing-page promo composition (6 scene types)
     agents.ts               # all 10 agents' data
   scripts/
     voiceover.mjs           # ElevenLabs API caller
-    build.mjs               # voiceover -> render -> mux orchestrator
+    build.mjs               # agent-intro pipeline (voiceover -> render -> mux)
+    build-promo.mjs         # promo pipeline (scenes JSON -> render -> mux)
+  scenes/
+    akhara-promo.json       # default promo scenes for the Command Console
+    <name>.json             # custom promos
   voiceover/
-    scripts/<id>.txt        # voiceover scripts (edit these)
-    <id>.mp3                # generated audio (gitignored)
+    scripts/<id>.txt        # agent voiceover scripts
+    scripts/promo-<n>.txt   # promo voiceover scripts (optional)
+    *.mp3                   # generated audio (gitignored)
   out/<id>.mp4              # final videos (gitignored)
 ```
+
+## Scene types (LandingPromo)
+
+The `LandingPromo` composition supports six scene types out of the box:
+
+- `title` — typing-effect headline with optional eyebrow and subhead
+- `imessage` — chat bubbles appearing one by one ("you" = gold, "them" = bone)
+- `stat-block` — up to 4 stats in a grid with optional label, headline, caption
+- `bullet-reveal` — bullets appear one at a time with gold-left rule
+- `quote` — large italic pull quote, optionally attributed
+- `outro` — gold "A" mark + headline + tagline + CTA pill
+
+Full schema reference in `.claude/skills/html-promo/SKILL.md`.
 
 ## Adding b-roll from Krea / Runway
 

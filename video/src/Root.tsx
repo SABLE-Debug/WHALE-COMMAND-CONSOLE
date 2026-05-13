@@ -1,6 +1,8 @@
-import { Composition } from "remotion";
+import { Composition, staticFile } from "remotion";
 import { AgentIntro } from "./AgentIntro";
+import { LandingPromo, calculateLandingPromoMetadata } from "./LandingPromo";
 import { AGENTS } from "./agents";
+import akharaPromoScenes from "../scenes/akhara-promo.json";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -18,7 +20,6 @@ export const RemotionRoot: React.FC = () => {
         />
       ))}
 
-      {/* Generic composition for ad-hoc renders */}
       <Composition
         id="AgentIntro"
         component={AgentIntro}
@@ -27,6 +28,16 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={{ agent: AGENTS[0], voiceoverUrl: null }}
+      />
+
+      <Composition
+        id="LandingPromo"
+        component={LandingPromo}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={akharaPromoScenes as any}
+        calculateMetadata={calculateLandingPromoMetadata}
       />
     </>
   );

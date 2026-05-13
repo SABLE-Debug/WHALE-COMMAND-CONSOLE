@@ -1,0 +1,28 @@
+{
+  "name": "akhara-video",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AKHARA agent showcase video pipeline — Remotion + ElevenLabs + ffmpeg",
+  "scripts": {
+    "video": "node scripts/build.mjs",
+    "promo": "node scripts/build-promo.mjs",
+    "voiceover": "node scripts/voiceover.mjs",
+    "render": "remotion render src/index.ts AgentIntro out/render.mp4",
+    "studio": "remotion studio src/index.ts",
+    "preview": "remotion preview src/index.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.0",
+    "@remotion/bundler": "4.0.0",
+    "@remotion/renderer": "4.0.0",
+    "@remotion/google-fonts": "4.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.3",
+    "typescript": "5.4.5"
+  }
+}
